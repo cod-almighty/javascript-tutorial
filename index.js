@@ -18,17 +18,21 @@ function generateTable(){
     let tblBody = document.createElement("tbody");
     let strings = ['E','B','G','D','A','E'];
 
+    tbl.classList.add("gridview");
+    
     for (let index in strings) {
         let note = strings[index];
 
         console.log(note);
         let row = document.createElement("tr")
-
+        
         for (let j = 0; j < 18; j++) {
+
             let cell = document.createElement("td");
             let cellText = document.createTextNode(note);
             cell.appendChild(cellText);
             row.appendChild(cell);
+            cell.setAttribute("onclick","toggleClass(this,'selected');");
             note = nextNote(note);
         }
         tblBody.appendChild(row);
@@ -38,6 +42,14 @@ function generateTable(){
     body.appendChild(tbl);
 }
 
+function toggleClass(el, className) {
+    if (el.className.indexOf(className) >= 0) {
+        el.className = className.replace(className,"");
+    }
+    else {
+        el.className += className;
+    }
+}
 
 generateTable();
 
