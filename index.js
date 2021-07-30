@@ -1,7 +1,7 @@
 //alert("I'm Working!");
+const chromaticScale = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
 
 function nextNote(currentNote) {
-    const chromaticScale = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
     let noteIndex = chromaticScale.indexOf(currentNote);
     if (currentNote === "B") {
         noteIndex = 0;
@@ -51,11 +51,11 @@ function toggleClass(el, className) {
         el.className += className;
     }
 }
-
+https://www.infoworld.com/article/2077176/using-javascript-and-forms.html
 function toggleScale() {
     const table = document.getElementById("main-table");
     const scale = ["G","A#","C","D","F"];
-    
+
     for (const row of table.rows){
         for (const cell of row.cells){
             if (scale.includes(cell.innerHTML)) {
@@ -66,7 +66,24 @@ function toggleScale() {
     }
 }
 
+function generateScale(note){
+    const major = [2,2,1,2,2,2,1]
+    const minor = [2,1,2,2,1,2,2]
+    let noteIndex = chromaticScale.indexOf(note);
+    let scale = [];
+    for (let step in minor) {
+        scale.push(chromaticScale[noteIndex]);
+        console.log(step);
+        noteIndex = noteIndex + minor[step];
+    }
+
+    console.log("scale[" + scale +"]");
+
+}
+
+
 generateTable();
+generateScale("D");
 toggleScale();
 /* for (i = 0; i < 18; i++) {
     
