@@ -4,10 +4,10 @@ function nextNote(currentNote) {
     const chromaticScale = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
     let noteIndex = chromaticScale.indexOf(currentNote);
     if (currentNote === "B") {
-        noteIndex = 0
+        noteIndex = 0;
     }
     else noteIndex++;
-    currentNote = chromaticScale[noteIndex]
+    currentNote = chromaticScale[noteIndex];
 
     return currentNote;
 }
@@ -19,7 +19,8 @@ function generateTable(){
     let strings = ['E','B','G','D','A','E'];
 
     tbl.classList.add("gridview");
-    
+    tbl.setAttribute("id","gridview");
+
     for (let index in strings) {
         let note = strings[index];
 
@@ -51,8 +52,21 @@ function toggleClass(el, className) {
     }
 }
 
-generateTable();
+function toggleScale() {
+    const table = document.getElementById("gridview");
+    const scale = ["G","A#","C","D","F"];
+    for (const row of table.rows){
+        for (const cell of row.cells){
+            if (scale.includes(cell.cellText)) {
+                cell.className += 'selected';
+            }
+        
+        }
+    }
+}
 
+generateTable();
+toggleScale();
 /* for (i = 0; i < 18; i++) {
     
     console.log("note" + i + ":" + note);
