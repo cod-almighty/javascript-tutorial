@@ -52,7 +52,7 @@ function toggleClass(el, className) {
         el.className += className;
     }
 }
-https://www.infoworld.com/article/2077176/using-javascript-and-forms.html
+
 function toggleScale() {
     const table = document.getElementById("main-table");
     const scale = ["G","A#","C","D","F"];
