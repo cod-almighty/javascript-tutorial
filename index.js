@@ -2,7 +2,7 @@
 const chromaticScale = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
 
 function nextNote(currentNote, step = 1) {
-    console.log(chromaticScale.length);
+    //console.log(chromaticScale.length);
     let noteIndex = chromaticScale.indexOf(currentNote);
     if (noteIndex + step > chromaticScale.length - 1){
         noteIndex = (noteIndex + step) - chromaticScale.length;
@@ -25,7 +25,7 @@ function generateTable(){
     for (let index in strings) {
         let note = strings[index];
 
-        console.log(note);
+        //console.log(note);
         let row = document.createElement("tr")
         
         for (let j = 0; j < 18; j++) {
