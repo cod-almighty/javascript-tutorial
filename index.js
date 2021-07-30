@@ -19,7 +19,7 @@ function generateTable(){
     let strings = ['E','B','G','D','A','E'];
 
     tbl.classList.add("gridview");
-    tbl.setAttribute("id","gridview");
+    tbl.setAttribute("id","main-table");
 
     for (let index in strings) {
         let note = strings[index];
@@ -53,11 +53,12 @@ function toggleClass(el, className) {
 }
 
 function toggleScale() {
-    const table = document.getElementById("gridview");
+    const table = document.getElementById("main-table");
     const scale = ["G","A#","C","D","F"];
+    
     for (const row of table.rows){
         for (const cell of row.cells){
-            if (scale.includes(cell.cellText)) {
+            if (scale.includes(cell.innerHTML)) {
                 cell.className += 'selected';
             }
         
