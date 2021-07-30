@@ -1,22 +1,23 @@
 //alert("I'm Working!");
 const chromaticScale = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
 
-function nextNote(currentNote) {
+function nextNote(currentNote, step = 1) {
+    console.log(chromaticScale.length);
     let noteIndex = chromaticScale.indexOf(currentNote);
-    if (currentNote === "B") {
-        noteIndex = 0;
+    if (noteIndex + step > chromaticScale.length - 1){
+        noteIndex = (noteIndex + step) - chromaticScale.length;
     }
-    else noteIndex++;
-    currentNote = chromaticScale[noteIndex];
+    else noteIndex = noteIndex + step;
+    newNote = chromaticScale[noteIndex];
 
-    return currentNote;
+    return newNote;
 }
 
 function generateTable(){
     let body = document.getElementsByTagName("body")[0];
     let tbl = document.createElement("table");
     let tblBody = document.createElement("tbody");
-    let strings = ['E','B','G','D','A','E'];
+    const strings = ['E','B','G','D','A','E'];
 
     tbl.classList.add("gridview");
     tbl.setAttribute("id","main-table");
@@ -69,13 +70,12 @@ function toggleScale() {
 function generateScale(note){
     const major = [2,2,1,2,2,2,1]
     const minor = [2,1,2,2,1,2,2]
-    let noteIndex = chromaticScale.indexOf(note);
-    let scale = [];
-    for (let step in minor) {
-        scale.push(chromaticScale[noteIndex]);
-        console.log(step);
-        noteIndex = noteIndex + minor[step];
-    }
+    //let noteIndex = chromaticScale.indexOf(note);
+    let scale = [note];
+    major.forEach(element => {
+        note = nextNote(note,element);
+        scale.push(note);      
+    });
 
     console.log("scale[" + scale +"]");
 
@@ -83,7 +83,7 @@ function generateScale(note){
 
 
 generateTable();
-generateScale("D");
+generateScale("G");
 toggleScale();
 /* for (i = 0; i < 18; i++) {
     
