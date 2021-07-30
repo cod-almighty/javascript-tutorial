@@ -36,7 +36,6 @@ function generateTable(){
 
     tbl.appendChild(tblBody);
     body.appendChild(tbl);
-    tbl.setAttribute("border", "2");
 }
 
 
