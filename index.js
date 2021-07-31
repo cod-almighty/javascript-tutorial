@@ -1,6 +1,25 @@
 //alert("I'm Working!");
 const chromaticScale = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
 
+//Log output to console
+function logging(logtext, context=""){
+    console.log(`DEBUG output [${logtext}], ${context}`);
+}
+
+//get note from text box when button is pushed
+function getScaleButton() {
+    let note = document.getElementById("noteText").value;
+    let penta = document.getElementById("penta-check").checked;
+    let minor = document.getElementById("minor-check").checked;
+    logging(note, "getNote");
+    logging(penta, "penta-check");
+    logging(minor, "minor-check");
+    scale = generateScale(note);
+    logging(scale, "getScaleButton");
+    toggleScale(scale);
+}
+
+//helper function to get next note in sequence
 function nextNote(currentNote, step = 1) {
     //console.log(chromaticScale.length);
     let noteIndex = chromaticScale.indexOf(currentNote);
@@ -13,6 +32,7 @@ function nextNote(currentNote, step = 1) {
     return newNote;
 }
 
+//generate the fretboard table
 function generateTable(){
     let body = document.getElementsByTagName("body")[0];
     let tbl = document.createElement("table");
@@ -44,6 +64,7 @@ function generateTable(){
     body.appendChild(tbl);
 }
 
+//toggle note highlight with click
 function toggleClass(el, className) {
     if (el.className.indexOf(className) >= 0) {
         el.className = className.replace(className,"");
@@ -53,9 +74,10 @@ function toggleClass(el, className) {
     }
 }
 
-function toggleScale() {
+//toggle highlighted scale
+function toggleScale(scale) {
     const table = document.getElementById("main-table");
-    const scale = ["G","A#","C","D","F"];
+    //const scale = ["G","A#","C","D","F"];
 
     for (const row of table.rows){
         for (const cell of row.cells){
@@ -72,21 +94,17 @@ function generateScale(note){
     const minor = [2,1,2,2,1,2,2]
     //let noteIndex = chromaticScale.indexOf(note);
     let scale = [note];
-    major.forEach(element => {
+    minor.forEach(element => {
         note = nextNote(note,element);
-        scale.push(note);      
+        scale.push(note);       
     });
 
-    console.log("scale[" + scale +"]");
-
+    logging(scale, "generateScale");
+    return scale;
 }
 
 
 generateTable();
-generateScale("G");
-toggleScale();
-/* for (i = 0; i < 18; i++) {
-    
-    console.log("note" + i + ":" + note);
-    note = nextNote(note);
-} */
+//scale = generateScale("G");
+//Logging('returned scale',scale);
+//toggleScale(scale);

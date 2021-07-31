@@ -1,0 +1,12 @@
+convert functions to objects
+have note as object
+note(note){
+    name = note
+    minorScale = generateScaleMinor(note);
+    majorScale = generateScaleMajor(note);
+    minorPentatonic = minorScale[0,1,2,4,7];
+    majorPentatonic = majorScale[0,1,2,4,7];
+    triad = majorScale[0,2,4];
+    
+}
+    
