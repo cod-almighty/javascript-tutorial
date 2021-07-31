@@ -11,11 +11,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital@1&display=swap" rel="stylesheet">
   </head>
   <body>
-    <input id="noteText" type="text" maxlength="2" pattern="[A-Ga-g]#{2}">
-    <input id="getScaleButton" onclick="getScaleButton();" type="button">
-    <input id="penta-check" type="checkbox">
-    <input id="minor-check" type="checkbox">
-    <script src="index.js"></script>
+    <div class="top">
+      <input id="noteText" type="text" maxlength="2" pattern="[A-Ga-g]#{2}">
+      <input id="getScaleButton" onclick="getScaleButton();" type="button">
+      <input id="penta-check" type="checkbox">
+      <input id="minor-check" type="checkbox">
+    </div>
+    <div class="bottom-left">
+      <table id="scale-chart">
+
+      </table>
+    </div>
+    <script src="notes/objects.js"></script>
   </body>
 
 </html>

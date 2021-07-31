@@ -3,19 +3,19 @@ table, th, td {
     border-collapse: collapse;
 }
 
-table {
+.tope table {
     width: 100%;
     height: 30%;
     table-layout: fixed;
 }
 
-td {
+.top td {
     text-align: center;
     padding: 15px;
     font-family: 'Ubuntu', sans-serif; 
 }
 
-th:first-child, td:first-child {
+.top th:first-child, .top td:first-child {
     width: 0em;
     min-width: 0em;
     max-width: 0em;
@@ -32,4 +32,25 @@ td:hover {
 
 .gridview .selected {
     background-color: darkgrey;
+}
+
+.top {
+    background-color: darkgray;
+}
+
+.bottom-left {
+    background-color: rgb(255, 255, 255);
+
+}
+
+.bottom-left table {
+    width: 50%;
+    background: lightgray;
+    border: 1px;
+}
+
+.bottom-left td {
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    padding: 15px;
 }

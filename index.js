@@ -1,7 +1,16 @@
-//alert("I'm Working!");
+/* 
+    app to generate scales from a given root note,
+    show the positions of each note on the guitar neck,
+    allow notes to be selected/deselected by click
+*/
+// Arrays being used. these should be moved into an object, maybe?
 const chromaticScale = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
+const majorSteps = [2,2,1,2,2,2];
+const minorSteps = [2,1,2,2,1,2];
+const majorPentatonicSteps = [2,2,3,4];
+const minorPentatonicSteps = [2,1,4,3];
 
-//Log output to console
+//format output before console.log
 function logging(logtext, context=""){
     console.log(`DEBUG output [${logtext}], ${context}`);
 }
@@ -103,8 +112,15 @@ function generateScale(note){
     return scale;
 }
 
+function generateTableHead(table) {
+    let thead = table.createTHead();
+    let row = thead.insertRow();
+    for 
+}
 
 generateTable();
+let table = document.getElementById("scale-chart");
+generateTableHead(table);
 //scale = generateScale("G");
 //Logging('returned scale',scale);
 //toggleScale(scale);
