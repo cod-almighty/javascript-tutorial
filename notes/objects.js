@@ -11,6 +11,16 @@ function logging(loginfo, context = '') {
     console.log(`DEBUG:: ${context} : [${loginfo}]`);
 }
 
+//toggle note highlight with click
+function toggleClass(el, className) {
+    if (el.className.indexOf(className) >= 0) {
+        el.className = className.replace(className,"");
+    }
+    else {
+        el.className += className;
+    }
+}
+
 //helper function to get next note in sequence
 function nextNote(currentNote, step = 1) {
     let noteIndex = chromaticScale.indexOf(currentNote);
@@ -24,22 +34,67 @@ function nextNote(currentNote, step = 1) {
     return newNote;
 }
 
-function Scale(rootNote) {
+//generate the fretboard table
+function generateFretboard(){
+    let body = document.getElementById("fretboard-id");   
+    let tbl = document.createElement("table");
+    let tblBody = document.createElement("tbody");
+    const strings = ['E','B','G','D','A','E'];
 
-    let getScale = function(steps){
+    tbl.classList.add("fretboard-table");
+
+    for (let index in strings) {
+        let note = strings[index];
+
+        //console.log(note);
+        let row = document.createElement("tr")
+        
+        for (let fret = 0; fret < 18; fret++) {
+
+            let cell = document.createElement("td");
+            let cellText = document.createTextNode(note);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+            cell.setAttribute("onclick","toggleClass(this,'selected');");
+            cell.setAttribute("id", "fret");
+            note = nextNote(note);
+        }
+        tblBody.appendChild(row);
+    }
+
+    tbl.appendChild(tblBody);
+    body.appendChild(tbl);
+}
+
+function Scale(rootNote, steps) {
+    
+    let getScale = function(rootNote, steps){
         let note = rootNote;
-        let scale = [note];
+        let scaleOut = [note];
         steps.forEach(element => {
             logging(element, "step");
             note = nextNote(note, element);
-            scale.push(note);
+            scaleOut.push(note);
         });
-        return scale;
+        return scaleOut;
     };
 
+    const scale = getScale(rootNote, steps);
+    this.I = scale[0],
+    this.II = scale[1],
+    this.III = scale[2],
+    this.IV = scale[3],
+    this.V = scale[4],
+    this.VI = scale[5],
+    this.VII = scale[6]
+    
+}
+
+function NoteInfo(rootNote) {
+
     this.root = rootNote;
-    this.major = getScale(majorSteps);
-    this.minor = getScale(minorSteps);
+    this.major = new Scale(rootNote, majorSteps);
+    this.minor = new Scale(rootNote, minorSteps);
     this.majorPentatonic = getScale(majorPentatonicSteps);
     this.minorPentatonic = getScale(minorPentatonicSteps);
 }
@@ -73,14 +128,8 @@ function generateTable(table, scaleObject) {
     }
 }
 
-const cScale = new Scale("C");
-let table = document.getElementById("scale-chart");
-let data = Object.keys(cScale);
-let tdata = Object.values(cScale);
-logging(tdata, "tdata variable")
-logging(data, "data variable")
-//generateTableHead(table, data);
-generateTable(table, tdata); 
+generateFretboard();
+
 
 //chord = new Scale("A");
 //let minorScale = chord.minor;

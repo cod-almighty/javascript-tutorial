@@ -1,56 +1,49 @@
-table, th, td {
+body {
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.main-grid-container {
+    display: grid;
+    grid-template-rows: 1fr 3fr;
+    grid-template-columns: 2fr 5fr 5fr;
+}
+
+.fretboard {
+    grid-column: 1 / 4;
+    grid-row: 1
+}
+
+.fretboard-table, th, td {
     border: 2px solid black;
     border-collapse: collapse;
 }
 
-.tope table {
+.fretboard-table {
     width: 100%;
-    height: 30%;
     table-layout: fixed;
 }
 
-.top td {
+#fret {
     text-align: center;
     padding: 15px;
     font-family: 'Ubuntu', sans-serif; 
 }
 
-.top th:first-child, .top td:first-child {
+.fretboard-table th:first-child, td:first-child {
     width: 0em;
     min-width: 0em;
     max-width: 0em;
     text-align:center;
 }
 
-td:hover {
+#fret:hover {
     background-color: #f5f5f5;
 }
 
-.gridview, .gridview td, .gridview th {
+.fretboard-table, #fret, .fretboard-table th {
     border: 1px solid #cccccc;
 }
 
-.gridview .selected {
+.selected {
     background-color: darkgrey;
-}
-
-.top {
-    background-color: darkgray;
-}
-
-.bottom-left {
-    background-color: rgb(255, 255, 255);
-
-}
-
-.bottom-left table {
-    width: 50%;
-    background: lightgray;
-    border: 1px;
-}
-
-.bottom-left td {
-    text-align: center;
-    font-family: 'Ubuntu', sans-serif;
-    padding: 15px;
 }

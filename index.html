@@ -9,20 +9,23 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital@1&display=swap" rel="stylesheet">
+    <script src="notes/objects.js" defer></script>
   </head>
   <body>
-    <div class="top">
-      <input id="noteText" type="text" maxlength="2" pattern="[A-Ga-g]#{2}">
-      <input id="getScaleButton" onclick="getScaleButton();" type="button">
-      <input id="penta-check" type="checkbox">
-      <input id="minor-check" type="checkbox">
-    </div>
-    <div class="bottom-left">
-      <table id="scale-chart">
-
-      </table>
-    </div>
-    <script src="notes/objects.js"></script>
+    <main class="main-grid-container">
+      <div class="fretboard" id='fretboard-id'>
+        <h1>fretboard</h1>
+      </div>
+      <div class="scales">
+        <h1>scales</h1>
+        <table id="scale-chart"></table>
+      </div>
+       <div class="menu">
+        <h1>menu</h1>
+      </div>
+      
+    </main>
+    
   </body>
 
 </html>
