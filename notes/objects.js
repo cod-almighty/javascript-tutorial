@@ -3,8 +3,8 @@
 const chromaticScale = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
 const majorSteps = [2,2,1,2,2,2];
 const minorSteps = [2,1,2,2,1,2];
-const majorPentatonicSteps = [2,2,3,4];
-const minorPentatonicSteps = [2,1,4,3];
+const majorPentatonicSteps = [2,2,3,2];
+const minorPentatonicSteps = [3,2,2,3];
 
 //format output when doing cosole.log()
 function logging(loginfo, context = '') {
@@ -21,6 +21,23 @@ function toggleClass(el, className) {
     }
 }
 
+//toggle highlighted scale
+function toggleScale(scale) {
+    const table = document.getElementById("fretboard-table");
+
+    for (const row of table.rows){
+        for (const cell of row.cells){
+            if (scale.includes(cell.innerHTML)) {
+                cell.className = 'selected';
+            }
+            else {
+                cell.className = "";
+            }
+        
+        }
+    }
+}
+
 //helper function to get next note in sequence
 function nextNote(currentNote, step = 1) {
     let noteIndex = chromaticScale.indexOf(currentNote);
@@ -34,6 +51,18 @@ function nextNote(currentNote, step = 1) {
     return newNote;
 }
 
+// Helper function to generate scale
+let getScale = function(rootNote, steps){
+    let note = rootNote;
+    let scaleOut = [note];
+    steps.forEach(element => {
+        logging(element, "step");
+        note = nextNote(note, element);
+        scaleOut.push(note);
+    });
+    return scaleOut;
+}
+
 //generate the fretboard table
 function generateFretboard(){
     let body = document.getElementById("fretboard-id");   
@@ -42,6 +71,7 @@ function generateFretboard(){
     const strings = ['E','B','G','D','A','E'];
 
     tbl.classList.add("fretboard-table");
+    tbl.setAttribute("id", "fretboard-table");
 
     for (let index in strings) {
         let note = strings[index];
@@ -64,22 +94,12 @@ function generateFretboard(){
 
     tbl.appendChild(tblBody);
     body.appendChild(tbl);
-}
+} // Generate Table END
 
 function Scale(rootNote, steps) {
-    
-    let getScale = function(rootNote, steps){
-        let note = rootNote;
-        let scaleOut = [note];
-        steps.forEach(element => {
-            logging(element, "step");
-            note = nextNote(note, element);
-            scaleOut.push(note);
-        });
-        return scaleOut;
-    };
-
     const scale = getScale(rootNote, steps);
+    logging(scale, "returned from getScale()")
+
     this.I = scale[0],
     this.II = scale[1],
     this.III = scale[2],
@@ -88,11 +108,12 @@ function Scale(rootNote, steps) {
     this.VI = scale[5],
     this.VII = scale[6]
     
-}
+} //Scale END
 
 function NoteInfo(rootNote) {
 
     this.root = rootNote;
+    //logging(`${rootNote} ${majorSteps}`, "data sent to Scale()")
     this.major = new Scale(rootNote, majorSteps);
     this.minor = new Scale(rootNote, minorSteps);
     this.majorPentatonic = getScale(majorPentatonicSteps);
@@ -128,8 +149,48 @@ function generateTable(table, scaleObject) {
     }
 }
 
-generateFretboard();
 
+
+function showMajor() {
+    const keySelect = document.getElementById("key-select");
+    const key = keySelect.options[keySelect.selectedIndex].value;
+
+    if (document.getElementById("penta-check").checked) {
+        scale = getScale(key, majorPentatonicSteps);
+    }
+    else {
+        scale = getScale(key, majorSteps);
+    }
+
+    toggleScale(scale);
+}
+
+function showMinor() {
+    const keySelect = document.getElementById("key-select");
+    const key = keySelect.options[keySelect.selectedIndex].value;
+
+    if (document.getElementById("penta-check").checked) {
+        scale = getScale(key, minorPentatonicSteps);
+    }
+    else {
+        scale = getScale(key, minorSteps);
+    }
+
+    toggleScale(scale);
+}
+
+function clearBoard() {
+    const table = document.getElementById("fretboard-table");
+
+    for (const row of table.rows){
+        for (const cell of row.cells){
+            cell.className = "";        
+        }
+    }
+}
+
+
+generateFretboard();
 
 //chord = new Scale("A");
 //let minorScale = chord.minor;

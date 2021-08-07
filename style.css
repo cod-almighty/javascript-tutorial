@@ -47,3 +47,8 @@ body {
 .selected {
     background-color: darkgrey;
 }
+
+.menu {
+    grid-column: 3 / 4;
+    grid-row: 2;
+}
